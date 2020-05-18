@@ -18,4 +18,4 @@ Movie Recommendation System web app using Node and OMDb API
 Search: 
 ![Search](./preview/search.png)
 Results:    
-![Results](./preview/search.png)
+![Results](./preview/results.png)
