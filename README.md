@@ -1,7 +1,10 @@
 # movie-recommendation-system
 Movie Recommendation System web app using Node and OMDb API
+--- 
+***Currently in progress***
 
-**Currently in progress**
+# Features:
+- Search feature to display 10 movies corresponding to query    
 
 # To-do:
 - [x] Create movie search feature using OMDb API

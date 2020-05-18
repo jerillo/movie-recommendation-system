@@ -6,13 +6,11 @@
             <% data.Search.forEach(movie => { %>
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
-                        <img src="<%= movie.Poster %>">
+                        <a href="/results/<%= movie.imdbID %>"><img src="<%= movie.Poster %>"></a>
                         <div class="caption">
                             <h4><%= movie.Title %></h4>
+                            <p><%= movie.Year %></p>
                         </div>
-                        <p>
-                            <%= movie.Year %>
-                        </p>
                     </div>
                 </div>    
             <% }); %>
