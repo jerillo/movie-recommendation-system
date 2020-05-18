@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Results for "<%= query %>"</h1>
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% data.Search.forEach(movie => { %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <img src="<%= movie.Poster %>">
+                        <div class="caption">
+                            <h4><%= movie.Title %></h4>
+                        </div>
+                        <p>
+                            <%= movie.Year %>
+                        </p>
+                    </div>
+                </div>    
+            <% }); %>
+        </div>
+    </div>
+    <a href="/">Go back to Search</a>
+</div>
+
+<%- include("partials/footer") %>
