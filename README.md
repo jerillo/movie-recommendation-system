@@ -5,20 +5,24 @@ Movie Recommendation System web app using Node and OMDb API
 
 # Features:
 - Search feature to display 10 movies corresponding to query    
-- Show page for specific movies
+- Show more information about a movie
+- Add a movie to list of movies you've watched
 
 # To-do:
 - [x] Create movie search feature using OMDb API
+- [x] Allow users to mark movies as seen
+- [x] Data persistence using MongoDB and Mongoose
 - [ ] Create users with authentication
-- [ ] Data persistence using MongoDB and Mongoose
-- [ ] Allow users to mark movies as seen
-- [ ] Create ratings system
 - [ ] Build movie recommendation system using k-means algorithm and least squares
 
 # Preview:
-Search: 
+Search for movies using OMDb:
 ![Search](./preview/search.png)
-Results:    
+Results page for search query:  
 ![Results](./preview/results.png)
-Show:
+View more information about a movie:
 ![Show](./preview/show.png)
+Add movies you've seen to your "watched" list and rate them:
+![Rate](./preview/rate.png)
+View your ratings
+![Ratings](./preview/ratings.png)

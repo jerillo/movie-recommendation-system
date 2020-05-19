@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+<div class="container">
+    <h1 style="text-align: center;">Ratings</h1>
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% ratings.forEach((rating) => { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <% if (rating.poster === "N/A") { %>
+                        <img src="/../img/default-poster.jpg"/>
+                    <% }  else { %>
+                        <img src="<%= rating.poster %>"/>
+                    <% } %>  
+                    <div class="caption">
+                        <h4><%= rating.title %></h4>
+                        <p><%= rating.year %></p>
+                        <i class="fa fa-star"></i> <%= rating.rating %>/10
+                        <h><%= rating.comment %></p>
+                    </div>
+                    <p>
+                        <a href="/results/<%= rating.imdbID %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>    
+        <% }); %>
+    </div>
+</div>
+<%- include("partials/footer") %>

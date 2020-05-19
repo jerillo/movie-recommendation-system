@@ -1,16 +1,17 @@
 <%- include("partials/header") %>
 <div class="container">
     <h1 style="text-align: center;"><%= data.Title %></h1>
-
-    <div class="row text-center">
-        <div class="thumbnail">
-            <% if (data.Poster === "N/A") { %>
-                <img src="/../img/default-poster.jpg"/>
-            <% }  else { %>
-                <img src="<%= data.Poster %>"/>
-            <% } %>        
-        </div>
-    </div>  
+    <div class="thumbnail">
+        <% if (data.Poster === "N/A") { %>
+            <img src="/../img/default-poster.jpg"/>
+        <% }  else { %>
+            <img src="<%= data.Poster %>"/>
+        <% } %>        
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><strong>IMDb Rating:</strong></div>
+        <div class="col-sm-10"><i class="fa fa-star"></i> <%= data.imdbRating %>/10</div>
+    </div> 
     <div class="row">
         <div class="col-sm-2"><strong>Release Date:</strong></div>
         <div class="col-sm-10"><%= data.Released %></div>
@@ -32,7 +33,7 @@
         <div class="col-sm-10"><%= data.Plot %></div>
     </div> 
     <div class="row" style="padding-top: 10px;">
-        <a href="/ratings/new"><button class="btn btn-primary"><i class="fa fa-eye"></i> Add to watched</button></a>
+        <a href="/ratings/<%= data.imdbID %>/new"><button class="btn btn-primary"><i class="fa fa-eye"></i> Add to watched</button></a>
         <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
