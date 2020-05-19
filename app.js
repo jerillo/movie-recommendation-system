@@ -106,6 +106,18 @@ app.post('/ratings/:id', (req, res) => {
     });
 });
 
+// View rating
+app.get('/ratings/:id', (req, res) => {
+    console.log("VIEW RATING");
+    Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
+        if (err) {
+            res.redirect('/ratings')
+        } else {
+            res.render('rating', {rating: foundRating})
+        }
+    });
+});
+
 // Edit rating
 app.get('/ratings/:id/edit', (req, res) => {
     Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
@@ -114,8 +126,8 @@ app.get('/ratings/:id/edit', (req, res) => {
         } else {
             res.render('edit', {rating: foundRating})
         }
-    })
-})
+    });
+});
 
 // Update rating
 app.put('/ratings/:id', (req, res) => {
@@ -125,8 +137,8 @@ app.put('/ratings/:id', (req, res) => {
         } else {
             res.redirect('/ratings')
         }
-    })
-})
+    });
+});
 
 // Delete rating
 app.delete('/ratings/:id', (req, res) => {
@@ -136,8 +148,8 @@ app.delete('/ratings/:id', (req, res) => {
         } else {
             res.redirect('/ratings')
         }
-    })
-})
+    });
+});
 
 
 app.listen(PORT, () => {
