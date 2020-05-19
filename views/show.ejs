@@ -1,9 +1,33 @@
 <%- include("partials/header") %>
 <div class="container">
-    <h1><%= data.Title %></h1>
-    <p><%= data.Year %></p>
-    <img src="<%= data.Poster %>">
-    
-    <p><%= data.Plot %></p>
+    <h1 style="text-align: center;"><%= data.Title %></h1>
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <div class="thumbnail"><img src="<%= data.Poster %>"/></div>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="col-sm-2"><strong>Release Date:</strong></div>
+        <div class="col-sm-10"><%= data.Released %></div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-2"><strong>Rated:</strong></div>
+        <div class="col-sm-10"><%= data.Rated %></div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-2"><strong>Runtime:</strong></div>
+        <div class="col-sm-10"><%= data.Runtime %></div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-2"><strong>Genre:</strong></div>
+        <div class="col-sm-10"><%= data.Genre %></div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-2"><strong>Plot:</strong></div>
+        <div class="col-sm-10"><%= data.Plot %></div>
+    </div> 
+    <div class="row">
+        <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a>
+    </div>
 </div>
 <%- include("partials/footer") %>

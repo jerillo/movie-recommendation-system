@@ -4,15 +4,19 @@ const express = require("express");
 const app = express();
 const request = require("request");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 
+mongoose.connect("mongodb://localhost:27017/yelp_camp", {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
+// Search page
 app.get("/", (req, res) => {
     res.render("search");
 });
 
+// Display results of search query
 app.get("/results", (req, res) => {
     const query = req.query.search;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&s=` + query;
@@ -24,6 +28,7 @@ app.get("/results", (req, res) => {
     });
 });
 
+// Display additional information about specific movie
 app.get("/results/:id", (req, res) => {
     const imdbID= req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
