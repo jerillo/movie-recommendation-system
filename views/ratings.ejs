@@ -1,6 +1,9 @@
 <%- include("partials/header") %>
 <div class="container">
-    <h1 style="text-align: center;">Movies you've seen</h1>
+    <h1 style="text-align: center;">Your Ratings</h1>
+    <h4 style="text-align: center;">
+        Total time watching movies: <%= Math.floor(totalTime/60) %> hours and <%= totalTime%60 %> minutes.
+    </h4>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% ratings.forEach((rating) => { %>
             <div class="col-md-3 col-sm-6">
@@ -12,13 +15,18 @@
                     <% } %>  
                     <div class="caption">
                         <h4><%= rating.title %></h4>
-                        <p><%= rating.year %></p>
+                        <h6><%= rating.year %></h6>
+                        <p><%= rating.runtime %> minutes</p>
                         <i class="fa fa-star"></i> <%= rating.rating %>/10
-                        <h><%= rating.comment %></p>
+                        <p><%= rating.comment %></p>
                     </div>
-                    <p>
-                        <a href="/results/<%= rating.imdbID %>" class="btn btn-primary">More Info</a>
-                    </p>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
+                        <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
+                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>    
         <% }); %>

@@ -4,7 +4,8 @@ const ratingSchema = new mongoose.Schema({
     year: String,
     imdbID: String,
     poster: String,
-    rating: String,
+    runtime: Number,
+    rating: Number,
     comment: String
 });
 module.exports = mongoose.model("Rating", ratingSchema);
