@@ -10,7 +10,7 @@
                     <img src="<%= data.Poster %>"/>
                 <% } %>        
             </div>
-            <form action="/ratings/<%= data.imdbID %>" method="POST">
+            <form action="/ratings/<%= data.imdbID %>" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label for="rating">Rating <i class="fa fa-star"></i></label>
                     <input class="form-control" type="number" id="rating" name="rating" min="0" max="10" step="0.1" placeholder="rating">

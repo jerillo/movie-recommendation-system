@@ -12,6 +12,7 @@ Movie Recommendation System web app using Node and OMDb API
 - [x] Create movie search feature using OMDb API
 - [x] Allow users to mark movies as seen
 - [x] Data persistence using MongoDB and Mongoose
+- [ ] Add watchlist
 - [ ] Create users with authentication
 - [ ] Build movie recommendation system using k-means algorithm and least squares
 

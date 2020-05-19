@@ -2,28 +2,30 @@
 <div class="container">
     <div class="row">
         <h1 style="text-align: center;">Results for "<%= query %>"</h1>
-        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-            <% data.Search.forEach(movie => { %>
-                <div class="col-md-4 col-sm-6">
-                    <div class="thumbnail">
-                        <a href="/results/<%= movie.imdbID %>">
-                            <% if (movie.Poster === "N/A") { %>
-                                <img src="/../img/default-poster.jpg"/>
-                            <% }  else { %>
-                                <img src="<%= movie.Poster %>"/>
-                            <% } %>
-                        </a>
-                        <div class="caption">
-                            <h4><%= movie.Title %></h4>
-                            <p><%= movie.Year %></p>
+        <div style="width: 90%; margin: 25px auto;">
+            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                <% data.Search.forEach(movie => { %>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="thumbnail">
+                            <a href="/results/<%= movie.imdbID %>">
+                                <% if (movie.Poster === "N/A") { %>
+                                    <img src="/../img/default-poster.jpg"/>
+                                <% }  else { %>
+                                    <img src="<%= movie.Poster %>"/>
+                                <% } %>
+                            </a>
+                            <div class="caption">
+                                <h4><%= movie.Title %></h4>
+                                <p><%= movie.Year %></p>
+                            </div>
                         </div>
-                    </div>
-                </div>    
-            <% }); %>
+                    </div>    
+                <% }); %>
+            </div>
+            <div class="row">
+                <a class="btn btn-primary" href="/" role="button">Go back to Search</a>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <a class="btn btn-primary" href="/" role="button">Go back to Search</a>
     </div>
 </div>
 

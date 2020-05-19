@@ -25,7 +25,12 @@ app.get("/results", (req, res) => {
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
-            res.render("results", {data: data, query: query});
+            if (data.Response === "False") {
+                console.log("BAD");
+                res.render("bad-results", {query: query});
+            } else {
+                res.render("results", {data: data, query: query});
+            }
         }
     });
 });
@@ -66,7 +71,7 @@ app.get("/ratings/:id/new", (req, res) => {
     });
 });
 
-// Add new rating to DB
+// Add new rating to ratings DB
 app.post("/ratings/:id", (req, res) => {
     const imdbID = req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
