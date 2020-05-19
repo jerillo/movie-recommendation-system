@@ -6,7 +6,13 @@
             <% data.Search.forEach(movie => { %>
                 <div class="col-md-4 col-sm-6">
                     <div class="thumbnail">
-                        <a href="/results/<%= movie.imdbID %>"><img src="<%= movie.Poster %>"/></a>
+                        <a href="/results/<%= movie.imdbID %>">
+                            <% if (movie.Poster === "N/A") { %>
+                                <img src="/../img/default-poster.jpg"/>
+                            <% }  else { %>
+                                <img src="<%= movie.Poster %>"/>
+                            <% } %>
+                        </a>
                         <div class="caption">
                             <h4><%= movie.Title %></h4>
                             <p><%= movie.Year %></p>

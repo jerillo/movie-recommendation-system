@@ -5,6 +5,7 @@ Movie Recommendation System web app using Node and OMDb API
 
 # Features:
 - Search feature to display 10 movies corresponding to query    
+- Show page for specific movies
 
 # To-do:
 - [x] Create movie search feature using OMDb API
@@ -19,3 +20,5 @@ Search:
 ![Search](./preview/search.png)
 Results:    
 ![Results](./preview/results.png)
+Show:
+![Show](./preview/show.png)

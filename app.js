@@ -9,7 +9,17 @@ const PORT = process.env.PORT || 3000;
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 app.set("view engine", "ejs");
+
+// SCHEMA SETUP
+const ratingSchema = new mongoose.Schema({
+    title: String,
+    imdbID: String,
+    runtime: String,
+    userRating: Float,
+    imdbRating: Float
+});
 
 // Search page
 app.get("/", (req, res) => {
@@ -38,6 +48,12 @@ app.get("/results/:id", (req, res) => {
             res.render("show", {data: data});
         }
     });
+});
+
+// Show form to create new rating
+app.get("/ratings/new", (req, res) => {
+    console.log("NEW PAGE")
+    res.render("new");
 });
 
 app.listen(PORT, () => {
