@@ -1,7 +1,8 @@
 <%- include("../partials/header") %>
 <div class="container">
     <h1 style="text-align: center;">Your rating for <%= rating.title %></h1>
-    <div class="row" id="show" style="text-align: center;">
+    <hr>
+    <div class="row movie-info" id="show" style="text-align: center;">
         <div class="col-sm-5">
             <div class="thumbnail">
                 <% if (rating.poster === "N/A") { %>
@@ -11,7 +12,7 @@
                 <% } %>  
             </div>
         </div>
-        <div class="col-sm-7 well">
+        <div class="col-sm-7">
             <div class="caption">
                 <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                 <p><%= rating.comment %></p>

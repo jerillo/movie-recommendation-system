@@ -26,10 +26,20 @@ router.get('/:id', (req, res) => {
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&plot=full&i=` + imdbID;
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            Rating.exists({imdbID: imdbID}, (err, result) => {
-                const ratingExists = result;
-                const data = JSON.parse(body);
-                res.render('results/show', {data: data, ratingExists: ratingExists});
+            const data = JSON.parse(body);
+            Rating.find({imdbID: imdbID}, (err, allRatings) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (req.user) {
+                        Rating.exists({author: {id: req.user._id, username: req.user.username}, imdbID: imdbID}, (err, result) => {
+                            const ratingExists = result;
+                            res.render('results/show', {data: data, ratingExists: ratingExists, ratings: allRatings});
+                        });
+                    } else {
+                        res.render('results/show', {data: data, ratingExists: false, ratings: allRatings});
+                    }
+                }
             });
         }
     });
