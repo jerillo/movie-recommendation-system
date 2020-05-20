@@ -1,7 +1,7 @@
 <%- include("../partials/header") %>
 <div class="container">
     <h1 style="text-align: center;">Your rating for <%= rating.title %></h1>
-    <div class="row" style="text-align: center;">
+    <div class="row" id="show" style="text-align: center;">
         <div class="col-sm-5">
             <div class="thumbnail">
                 <% if (rating.poster === "N/A") { %>
@@ -11,8 +11,8 @@
                 <% } %>  
             </div>
         </div>
-        <div class="col-sm-7">
-            <div class="caption well">
+        <div class="col-sm-7 well">
+            <div class="caption">
                 <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                 <p><%= rating.comment %></p>
                 <div class="row" style="padding-bottom: 10px;">
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row" style="padding-bottom: 10px;">
-        <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a> 
+        <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>

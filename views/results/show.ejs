@@ -1,7 +1,7 @@
 <%- include("../partials/header") %>
 <div class="container">
     <h1 style="text-align: center;"><%= data.Title %></h1>
-    <div class="row">
+    <div class="row" id="show">
         <div class="col-sm-5">
             <div class="thumbnail">
                 <% if (data.Poster === "N/A") { %>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-sm-7 well">
-            <div style="padding-left: 2.5%; padding-right: 2.5%">
+            <div class="caption">
                 <div class="row">
                     <div class="col-sm-3"><strong>IMDb Rating:</strong></div>
                     <div class="col-sm-9"><i class="fa fa-star"></i> <%= data.imdbRating %>/10</div>
@@ -58,7 +58,7 @@
 
     
     <div class="row" style="padding-bottom: 10px;">
-        <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a> 
+        <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>

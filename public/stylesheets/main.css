@@ -5,3 +5,7 @@
 .thumbnail {
     padding: 0;
 }
+
+#show {
+    display: flex;
+}
