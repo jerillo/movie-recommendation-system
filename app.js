@@ -18,6 +18,18 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
 
+// PASSPORT CONFIGURATION
+app.use(require('express-session')({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 // Search page
 app.get('/', (req, res) => {
     res.render('search');
