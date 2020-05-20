@@ -18,8 +18,8 @@
                             <li><a href="/login">Login</a></li>
                             <li><a href="/register">Sign Up</a></li>
                         <% } else { %> 
-                            <li><a href="#">Signed In As <%= currentUser.username %></a></li>
-                            <li><a href="/ratings"><i class="fa fa-star"></i> View Your Ratings</a></li>
+                            <li><a href="#">Hello, <%= currentUser.username %>!</a></li>
+                            <li><a href="/ratings"><i class="fa fa-star"></i> Your Ratings</a></li>
                             <li><a href="/logout">Logout</a></li>
                         <% } %> 
                     </ul>
