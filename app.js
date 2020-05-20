@@ -36,14 +36,17 @@ app.get('/results', (req, res) => {
     });
 });
 
-// Display additional information about specific movie
+// Show page for movie
 app.get('/results/:id', (req, res) => {
     const imdbID= req.params.id;
-    const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
+    const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&plot=full&i=` + imdbID;
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const data = JSON.parse(body);
-            res.render('show', {data: data});
+            Rating.exists({imdbID: imdbID}, (err, result) => {
+                const ratingExists = result;
+                const data = JSON.parse(body);
+                res.render('show', {data: data, ratingExists: ratingExists});
+            });
         }
     });
 });
@@ -108,7 +111,6 @@ app.post('/ratings/:id', (req, res) => {
 
 // View rating
 app.get('/ratings/:id', (req, res) => {
-    console.log("VIEW RATING");
     Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -150,7 +152,6 @@ app.delete('/ratings/:id', (req, res) => {
         }
     });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

@@ -17,7 +17,7 @@
                         <h4><%= rating.title %></h4>
                         <h6><%= rating.year %></h6>
                         <p><%= rating.runtime %> minutes</p>
-                        <i class="fa fa-star"></i> <%= rating.rating %>/10
+                        <p><i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                         <% if (rating.comment.length > 100) { %>
                             <p><%= rating.comment.substring(0, 25) %>...</p>
                         <% } else { %>
