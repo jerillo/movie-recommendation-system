@@ -82,7 +82,7 @@ app.get('/results/:id', (req, res) => {
 // ==========================================
 
 // Show all user ratings
-app.get('/ratings', (req, res) => {
+app.get('/ratings', isLoggedIn, (req, res) => {
     // Get all ratings from DB
     Rating.find({}, (err, allRatings) => {
         if (err) {
@@ -98,7 +98,7 @@ app.get('/ratings', (req, res) => {
 });
 
 // Show form to create new rating
-app.get('/ratings/:id/new', (req, res) => {
+app.get('/ratings/:id/new', isLoggedIn, (req, res) => {
     const imdbID = req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
     request(url, (error, response, body) => {
@@ -110,7 +110,7 @@ app.get('/ratings/:id/new', (req, res) => {
 });
 
 // Add new rating to ratings DB
-app.post('/ratings/:id', (req, res) => {
+app.post('/ratings/:id', isLoggedIn, (req, res) => {
     const imdbID = req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
     request(url, (error, response, body) => {
@@ -140,7 +140,7 @@ app.post('/ratings/:id', (req, res) => {
 });
 
 // View rating
-app.get('/ratings/:id', (req, res) => {
+app.get('/ratings/:id', isLoggedIn, (req, res) => {
     Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -151,7 +151,7 @@ app.get('/ratings/:id', (req, res) => {
 });
 
 // Edit rating
-app.get('/ratings/:id/edit', (req, res) => {
+app.get('/ratings/:id/edit', isLoggedIn, (req, res) => {
     Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -162,7 +162,7 @@ app.get('/ratings/:id/edit', (req, res) => {
 });
 
 // Update rating
-app.put('/ratings/:id', (req, res) => {
+app.put('/ratings/:id', isLoggedIn, (req, res) => {
     Rating.findOneAndUpdate({imdbID: req.params.id}, {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -173,7 +173,7 @@ app.put('/ratings/:id', (req, res) => {
 });
 
 // Delete rating
-app.delete('/ratings/:id', (req, res) => {
+app.delete('/ratings/:id', isLoggedIn, (req, res) => {
     Rating.deleteOne({imdbID: req.params.id}, err => {
         if (err) {
             res.redirect('/ratings')
