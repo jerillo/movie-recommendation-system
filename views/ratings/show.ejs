@@ -1,26 +1,29 @@
 <%- include("../partials/header") %>
 <div class="container">
     <h1 style="text-align: center;">Your rating for <%= rating.title %></h1>
-    <div class="thumbnail">
-        <% if (rating.poster === "N/A") { %>
-            <img src="/../img/default-poster.jpg"/>
-        <% }  else { %>
-            <img src="<%= rating.poster %>"/>
-        <% } %>  
-    </div>
-    <div class="caption" style="text-align: center;">
-        <h4><%= rating.title %></h4>
-        <h6><%= rating.year %></h6>
-        <p><%= rating.runtime %> minutes</p>
-        <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
-        <p><%= rating.comment %></p>
-    </div>
-    <div class="row" style="padding-bottom: 10px; text-align: center;">
-        <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
-        <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-        <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
-            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-        </form>
+    <div class="row" style="text-align: center;">
+        <div class="col-sm-5">
+            <div class="thumbnail">
+                <% if (rating.poster === "N/A") { %>
+                    <img src="/../img/default-poster.jpg"/>
+                <% }  else { %>
+                    <img src="<%= rating.poster %>"/>
+                <% } %>  
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="caption well">
+                <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
+                <p><%= rating.comment %></p>
+                <div class="row" style="padding-bottom: 10px;">
+                    <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
+                    <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                    <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
+                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row" style="padding-bottom: 10px;">
         <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a> 
