@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("../partials/header") %>
 <div class="container">
     <h1 style="text-align: center;"><%= data.Title %></h1>
     <div class="thumbnail">
@@ -44,11 +44,11 @@
     </div>
     <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
         <% if (ratingExists) { %>
-            <a href="/ratings/<%= data.imdbID %>"><button class="btn btn-primary"><i class="fa fa-star"></i> View Rating</button></a>
+            <a href="/ratings/<%= data.imdbID %>"><button class="btn btn-success"><i class="fa fa-star"></i> View Rating</button></a>
         <% } else { %>
-            <a href="/ratings/<%= data.imdbID %>/new"><button class="btn btn-primary"><i class="fa fa-star"></i> Rate movie</button></a>
+            <a href="/ratings/<%= data.imdbID %>/new"><button class="btn btn-success"><i class="fa fa-star"></i> Rate movie</button></a>
         <% } %>
         <a class="btn btn-primary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
-<%- include("partials/footer") %>
+<%- include("../partials/footer") %>

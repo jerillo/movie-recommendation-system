@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.render('search');
 });
 
+// ==========================================
+// RESULTS ROUTES
+// ==========================================
+
 // Display results of search query
 app.get('/results', (req, res) => {
     const query = req.query.search;
@@ -28,9 +32,9 @@ app.get('/results', (req, res) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
             if (data.Response === 'False') {
-                res.render('bad-results', {query: query, error: data.Error});
+                res.render('results/bad-results', {query: query, error: data.Error});
             } else {
-                res.render('results', {data: data, query: query});
+                res.render('results/index', {data: data, query: query});
             }
         }
     });
@@ -45,11 +49,15 @@ app.get('/results/:id', (req, res) => {
             Rating.exists({imdbID: imdbID}, (err, result) => {
                 const ratingExists = result;
                 const data = JSON.parse(body);
-                res.render('show', {data: data, ratingExists: ratingExists});
+                res.render('results/show', {data: data, ratingExists: ratingExists});
             });
         }
     });
 });
+
+// ==========================================
+// RATINGS ROUTES
+// ==========================================
 
 // Show all user ratings
 app.get('/ratings', (req, res) => {
@@ -62,7 +70,7 @@ app.get('/ratings', (req, res) => {
             allRatings.forEach((rating) => {
                 totalTime += rating.runtime;
             });
-            res.render('ratings', {ratings: allRatings, totalTime: totalTime});
+            res.render('ratings/index', {ratings: allRatings, totalTime: totalTime});
         }
     });
 });
@@ -74,7 +82,7 @@ app.get('/ratings/:id/new', (req, res) => {
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
-            res.render('new', {data: data});
+            res.render('ratings/new', {data: data});
         }
     });
 });
@@ -115,7 +123,7 @@ app.get('/ratings/:id', (req, res) => {
         if (err) {
             res.redirect('/ratings')
         } else {
-            res.render('rating', {rating: foundRating})
+            res.render('ratings/show', {rating: foundRating})
         }
     });
 });
@@ -126,7 +134,7 @@ app.get('/ratings/:id/edit', (req, res) => {
         if (err) {
             res.redirect('/ratings')
         } else {
-            res.render('edit', {rating: foundRating})
+            res.render('ratings/edit', {rating: foundRating})
         }
     });
 });
