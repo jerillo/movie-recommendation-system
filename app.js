@@ -176,6 +176,26 @@ app.delete('/ratings/:id', (req, res) => {
     });
 });
 
+// ==========================================
+// AUTH ROUTES
+// ==========================================
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    const newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.render('register');
+        }
+        passport.authenticate('local')(req, res, () => {
+            res.redirect('/')
+        });
+    }); 
+});
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
