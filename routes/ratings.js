@@ -7,15 +7,15 @@ const Rating = require('../models/rating');
 // Show all user ratings
 router.get('/', isLoggedIn, (req, res) => {
     // Get all ratings from DB
-    Rating.find({}, (err, allRatings) => {
+    Rating.find({author: {id: req.user._id, username: req.user.username}}, (err, ratings) => {
         if (err) {
-            console.log(err);
+            console.log("ERROR")
         } else {
             let totalTime = 0;
-            allRatings.forEach((rating) => {
+            ratings.forEach((rating) => {
                 totalTime += rating.runtime;
             });
-            res.render('ratings/index', {ratings: allRatings, totalTime: totalTime});
+            res.render('ratings/index', {ratings: ratings, totalTime: totalTime});
         }
     });
 });
@@ -48,13 +48,19 @@ router.post('/:id', isLoggedIn, (req, res) => {
                 poster: data.Poster,
                 runtime: parseFloat(data.Runtime),
                 rating: rating,
-                comment: comment
+                comment: comment,
+                author: {
+                    id: req.user._id,
+                    username: req.user.username
+                }
             };
             // Create a new rating and save to ratings DB
             Rating.create(newRating, (err, newlyCreated) => {
                 if (err) {
                     console.log(err);
                 } else {
+                    req.user.ratings.push(newlyCreated);
+                    req.user.save();
                     res.redirect('/ratings');
                 }
             });
@@ -64,7 +70,7 @@ router.post('/:id', isLoggedIn, (req, res) => {
 
 // View rating
 router.get('/:id', isLoggedIn, (req, res) => {
-    Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
+    Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
         } else {
@@ -75,7 +81,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
 
 // Edit rating
 router.get('/:id/edit', isLoggedIn, (req, res) => {
-    Rating.findOne({imdbID: req.params.id}, (err, foundRating) => {
+    Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
         } else {
@@ -86,7 +92,8 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
 
 // Update rating
 router.put('/:id', isLoggedIn, (req, res) => {
-    Rating.findOneAndUpdate({imdbID: req.params.id}, {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
+    Rating.findOneAndUpdate({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id},
+            {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
         if (err) {
             res.redirect('/ratings')
         } else {
@@ -97,7 +104,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
 
 // Delete rating
 router.delete('/:id', isLoggedIn, (req, res) => {
-    Rating.deleteOne({imdbID: req.params.id}, err => {
+    Rating.deleteOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, err => {
         if (err) {
             res.redirect('/ratings')
         } else {
