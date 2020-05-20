@@ -5,11 +5,14 @@ const app = express();
 const request = require('request');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override')
 const Rating = require('./models/rating');
+const User = require('./models/user');
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/movies', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/movies', {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'))
