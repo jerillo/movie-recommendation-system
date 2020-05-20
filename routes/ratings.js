@@ -3,9 +3,10 @@ const router = express.Router();
 const request = require('request');
 const bodyParser = require('body-parser');
 const Rating = require('../models/rating');
+const middleware = require('../middleware');
 
 // Show all user ratings
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/', middleware.isLoggedIn, (req, res) => {
     // Get all ratings from DB
     Rating.find({author: {id: req.user._id, username: req.user.username}}, (err, ratings) => {
         if (err) {
@@ -21,7 +22,7 @@ router.get('/', isLoggedIn, (req, res) => {
 });
 
 // Show form to create new rating
-router.get('/:id/new', isLoggedIn, (req, res) => {
+router.get('/:id/new', middleware.isLoggedIn, (req, res) => {
     const imdbID = req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
     request(url, (error, response, body) => {
@@ -33,7 +34,7 @@ router.get('/:id/new', isLoggedIn, (req, res) => {
 });
 
 // Add new rating to ratings DB
-router.post('/:id', isLoggedIn, (req, res) => {
+router.post('/:id', middleware.isLoggedIn, (req, res) => {
     const imdbID = req.params.id;
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
     request(url, (error, response, body) => {
@@ -69,7 +70,7 @@ router.post('/:id', isLoggedIn, (req, res) => {
 });
 
 // View rating
-router.get('/:id', isLoggedIn, (req, res) => {
+router.get('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -80,7 +81,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
 });
 
 // Edit rating
-router.get('/:id/edit', isLoggedIn, (req, res) => {
+router.get('/:id/edit', middleware.isLoggedIn, (req, res) => {
     Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
         if (err) {
             res.redirect('/ratings')
@@ -91,7 +92,7 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
 });
 
 // Update rating
-router.put('/:id', isLoggedIn, (req, res) => {
+router.put('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.findOneAndUpdate({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id},
             {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
         if (err) {
@@ -103,7 +104,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
 });
 
 // Delete rating
-router.delete('/:id', isLoggedIn, (req, res) => {
+router.delete('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.deleteOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, err => {
         if (err) {
             res.redirect('/ratings')
@@ -112,13 +113,5 @@ router.delete('/:id', isLoggedIn, (req, res) => {
         }
     });
 });
-
-// Middleware
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-}
 
 module.exports = router;
