@@ -1,7 +1,6 @@
 require('dotenv').config({path:'./.env'});
 
 const express = require('express');
-const app = express();
 const request = require('request');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,6 +12,8 @@ const User = require('./models/user');
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost:27017/movies', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'))
@@ -29,6 +30,12 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// Pass currentUser as param
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // Search page
 app.get('/', (req, res) => {
@@ -179,10 +186,13 @@ app.delete('/ratings/:id', (req, res) => {
 // ==========================================
 // AUTH ROUTES
 // ==========================================
+
+// Show register form
 app.get('/register', (req, res) => {
     res.render('register');
 });
 
+// Handle sign up logic
 app.post('/register', (req, res) => {
     const newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, (err, user) => {
@@ -195,6 +205,34 @@ app.post('/register', (req, res) => {
         });
     }); 
 });
+
+// Show login form
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+// Handle login logic
+app.post('/login', passport.authenticate('local', 
+    {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }), (req, res) => {
+    res.send('login');
+});
+
+// Logic route
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
+// Middleware
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
