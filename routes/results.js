@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
             const data = JSON.parse(body);
             if (data.Response === 'False') {
                 req.flash('error', 'Movie not found');
-                res.redirect('/');
+                return res.redirect('/');
             }
             Rating.find({imdbID: imdbID}, (err, allRatings) => {
                 if (err) {

@@ -39,7 +39,7 @@ router.post('/:id', middleware.isLoggedIn, (req, res) => {
     const url = `http://www.omdbapi.com/?apikey=${process.env.APIKEY}&i=` + imdbID;
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            data = JSON.parse(body);
+            const data = JSON.parse(body);
             const rating = req.body.rating;
             const comment = req.body.comment;
             const newRating = {
@@ -72,7 +72,8 @@ router.post('/:id', middleware.isLoggedIn, (req, res) => {
 // View rating
 router.get('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
-        if (err) {
+        if (err || !foundRating) {
+            req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
             res.render('ratings/show', {rating: foundRating})
@@ -83,7 +84,8 @@ router.get('/:id', middleware.isLoggedIn, (req, res) => {
 // Edit rating
 router.get('/:id/edit', middleware.isLoggedIn, (req, res) => {
     Rating.findOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, (err, foundRating) => {
-        if (err) {
+        if (err || !foundRating) {
+            req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
             res.render('ratings/edit', {rating: foundRating})
@@ -95,7 +97,8 @@ router.get('/:id/edit', middleware.isLoggedIn, (req, res) => {
 router.put('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.findOneAndUpdate({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id},
             {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
-        if (err) {
+        if (err || !foundRating) {
+            req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
             res.redirect('/ratings')
@@ -106,7 +109,8 @@ router.put('/:id', middleware.isLoggedIn, (req, res) => {
 // Delete rating
 router.delete('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.deleteOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, err => {
-        if (err) {
+        if (err || !foundRating) {
+            req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
             res.redirect('/ratings')
