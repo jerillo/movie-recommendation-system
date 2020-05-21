@@ -9,7 +9,6 @@ const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override')
 const Rating = require('./models/rating');
 const User = require('./models/user');
-const PORT = process.env.PORT || 3000;
 
 // Requiring routes
 const resultRoutes = require('./routes/results');
@@ -45,6 +44,6 @@ app.use('/', indexRoutes);
 app.use('/results', resultRoutes);
 app.use('/ratings', ratingRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+app.listen(process.env.PORT, process.env.IP, () => {
+    console.log(`Server is listening on port ${process.env.PORT}`);
 });
