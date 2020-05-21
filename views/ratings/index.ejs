@@ -28,6 +28,7 @@
                                 <p><%= rating.comment %></p>
                             <% } %>
                         <% } %>
+                        <p><em>Created <%= moment(rating.createdAt).fromNow() %></em></p>
                         <a class="btn btn-link" href="/ratings/<%= rating.imdbID %>">
                             Read More
                             <i class="fa fa-chevron-right"></i>

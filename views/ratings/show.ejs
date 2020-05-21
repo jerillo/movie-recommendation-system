@@ -18,6 +18,7 @@
             <div class="caption">
                 <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                 <p><%= rating.comment %></p>
+                <p><small><em>Created <%= moment(rating.createdAt).fromNow() %></em></small></p>
                 <div class="d-flex justify-content-center">
                     <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle">  </i></a>  
                     <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit">  </i></a>  

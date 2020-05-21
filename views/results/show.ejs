@@ -64,9 +64,10 @@
                     <div class="col-md-12">
                         <strong><%= rating.author.username %></strong>
                         <span class="pull-right"><i class="fa fa-star"></i> <%= rating.rating %>/10</span>
-                        <p>
+                        <p style="margin: 0;">
                             <%= rating.comment %>
                         </p>
+                        <small><em><%= moment(rating.createdAt).fromNow() %></em></small>
                     </div>
                 </div>
             <% }) %>

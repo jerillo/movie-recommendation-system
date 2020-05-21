@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override')
 const Rating = require('./models/rating');
 const User = require('./models/user');
+app.locals.moment = require('moment');
 
 // Requiring routes
 const resultRoutes = require('./routes/results');
