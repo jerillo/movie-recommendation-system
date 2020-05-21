@@ -1,55 +1,55 @@
 <%- include("../partials/header") %>
 <div class="container">
-    <h1 style="text-align: center;"><%= data.Title %></h1>
-    <hr>
+    <div class="title">
+        <h1 style="text-align: center;"><%= data.Title %></h1>
+        <hr>
+    </div>
     <div class="row movie-info" id="show">
         <div class="col-sm-5">
-            <div class="thumbnail">
+            <div class="figure rounded">
                 <% if (data.Poster === "N/A") { %>
-                    <img src="/../img/default-poster.jpg"/>
+                    <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
                 <% }  else { %>
-                    <img src="<%= data.Poster %>"/>
+                    <img class="figure-img img-fluid rounded" src="<%= data.Poster %>"/>
                 <% } %>        
             </div>
         </div>
         <div class="col-sm-7">
-            <div class="caption">
-                <div class="row">
-                    <div class="col-sm-3"><strong>IMDb Rating:</strong></div>
-                    <div class="col-sm-9"><i class="fa fa-star"></i> <%= data.imdbRating %>/10</div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Release Date:</strong></div>
-                    <div class="col-sm-9"><%= data.Released %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Starring:</strong></div>
-                    <div class="col-sm-9"><%= data.Actors %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Rated:</strong></div>
-                    <div class="col-sm-9"><%= data.Rated %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Runtime:</strong></div>
-                    <div class="col-sm-9"><%= data.Runtime %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Genre:</strong></div>
-                    <div class="col-sm-9"><%= data.Genre %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Plot:</strong></div>
-                    <div class="col-sm-9"><%= data.Plot %></div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-3"><strong>Awards:</strong></div>
-                    <div class="col-sm-9"><%= data.Awards %></div>
-                </div> 
-            </div>
+            <div class="row">
+                <div class="col-sm-3"><strong>IMDb Rating:</strong></div>
+                <div class="col-sm-9"><i class="fa fa-star"></i> <%= data.imdbRating %>/10</div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Release Date:</strong></div>
+                <div class="col-sm-9"><%= data.Released %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Starring:</strong></div>
+                <div class="col-sm-9"><%= data.Actors %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Rated:</strong></div>
+                <div class="col-sm-9"><%= data.Rated %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Runtime:</strong></div>
+                <div class="col-sm-9"><%= data.Runtime %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Genre:</strong></div>
+                <div class="col-sm-9"><%= data.Genre %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Plot:</strong></div>
+                <div class="col-sm-9"><%= data.Plot %></div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-3"><strong>Awards:</strong></div>
+                <div class="col-sm-9"><%= data.Awards %></div>
+            </div> 
         </div>
     </div>
-    <div class="row all-ratings well">
+    <div class="row all-ratings card">
         <div class="text-right">
             <% if (ratingExists) { %>
                 <a href="/ratings/<%= data.imdbID %>"><button class="btn btn-success"><i class="fa fa-star"></i> View Rating</button></a>
@@ -58,21 +58,28 @@
             <% } %>
         </div>
         <hr>
-        <% ratings.forEach(rating => { %>
+        <% if (ratings.length > 0) { %> 
+            <% ratings.forEach(rating => { %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= rating.author.username %></strong>
+                        <span class="pull-right"><i class="fa fa-star"></i> <%= rating.rating %>/10</span>
+                        <p>
+                            <%= rating.comment %>
+                        </p>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
             <div class="row">
                 <div class="col-md-12">
-                    <strong><%= rating.author.username %></strong>
-                    <span class="pull-right"><i class="fa fa-star"></i> <%= rating.rating %>/10</span>
-                    <p>
-                        <%= rating.comment %>
-                    </p>
+                    <em>No ratings yet</em>
                 </div>
             </div>
-        <% }) %>
+        <% } %>  
     </div>
-
-    <div class="row" style="padding-bottom: 10px;">
-        <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
+    <div class="row">
+        <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>

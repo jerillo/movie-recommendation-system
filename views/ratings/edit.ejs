@@ -1,7 +1,10 @@
 <%- include("../partials/header") %>
 <div class="container">
-    <div class="row">
+    <div class="title">
         <h1 style="text-align: center;">Edit <%= rating.title %> rating</h1>
+        <hr>
+    </div>
+    <div class="row">
         <div style="width: 30%; margin: 25px auto;">
             <div class="thumbnail">
                 <% if (rating.poster === "N/A") { %>
@@ -23,7 +26,7 @@
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
             </form>
-            <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
+            <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
         </div>
     </div>
 </div>

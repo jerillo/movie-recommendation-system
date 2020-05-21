@@ -1,14 +1,16 @@
 <%- include("../partials/header") %>
 <div class="container">
-    <h1 style="text-align: center;">Your rating for <%= rating.title %></h1>
-    <hr>
+    <div class="title">
+        <h1 style="text-align: center;">Your rating for <%= rating.title %></h1>
+        <hr>
+    </div>
     <div class="row movie-info" id="show" style="text-align: center;">
         <div class="col-sm-5">
-            <div class="thumbnail">
+            <div class="figure rounded">
                 <% if (rating.poster === "N/A") { %>
-                    <img src="/../img/default-poster.jpg"/>
+                    <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
                 <% }  else { %>
-                    <img src="<%= rating.poster %>"/>
+                    <img class="figure-img img-fluid rounded" src="<%= rating.poster %>"/>
                 <% } %>  
             </div>
         </div>
@@ -16,10 +18,10 @@
             <div class="caption">
                 <p><strong>Your rating: </strong> <i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                 <p><%= rating.comment %></p>
-                <div class="row" style="padding-bottom: 10px;">
-                    <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
-                    <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                    <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
+                <div class="d-flex justify-content-center">
+                    <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle">  </i></a>  
+                    <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit">  </i></a>  
+                    <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     </form>
                 </div>
@@ -27,7 +29,7 @@
         </div>
     </div>
     <div class="row" style="padding-bottom: 10px;">
-        <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
+        <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>

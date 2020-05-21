@@ -1,19 +1,24 @@
 <%- include("../partials/header") %>
 <div class="container">
-    <h1 style="text-align: center;">Your Ratings</h1>
-    <h4 style="text-align: center;">
-        Total time watching these movies: <%= Math.floor(totalTime/60) %> hours and <%= totalTime%60 %> minutes.
-    </h4>
+    <div class="title">
+        <h1 style="text-align: center;">Your Ratings</h1>
+        <h5 style="text-align: center;">
+            Total time watching these movies: <%= Math.floor(totalTime/60) %> hours and <%= totalTime%60 %> minutes.
+        </h5>
+        <hr>
+    </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% ratings.forEach((rating) => { %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <% if (rating.poster === "N/A") { %>
-                        <img src="/../img/default-poster.jpg"/>
-                    <% }  else { %>
-                        <img src="<%= rating.poster %>"/>
-                    <% } %>  
-                    <div class="caption">
+            <div class="col-md-3 col-6">
+                <div class="figure rounded">
+                    <a href="/ratings/<%= rating.imdbID %>">
+                        <% if (rating.poster === "N/A") { %>
+                            <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
+                        <% }  else { %>
+                            <img class="figure-img img-fluid rounded" src="<%= rating.poster %>"/>
+                        <% } %>  
+                    </a>
+                    <figcaption class="figure-caption">
                         <h4><%= rating.title %></h4>
                         <p><i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                         <% if (rating.comment) { %> 
@@ -23,24 +28,24 @@
                                 <p><%= rating.comment %></p>
                             <% } %>
                         <% } %>
-                        <a class="btn btn-small" href="/ratings/<%= rating.imdbID %>">
+                        <a class="btn btn-link" href="/ratings/<%= rating.imdbID %>">
                             Read More
                             <i class="fa fa-chevron-right"></i>
                         </a>
-                    </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
-                        <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                        <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
-                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                        </form>
-                    </div>
+                        <div class="d-flex justify-content-center p-2">
+                            <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
+                            <a href="/ratings/<%= rating.imdbID %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                            <form id="delete" action="/ratings/<%= rating.imdbID %>?_method=DELETE" method="POST" style="display: inline-block;">
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </figcaption>
                 </div>
             </div>    
         <% }); %>
     </div>
     <div class="row" style="padding-bottom: 10px;">
-        <a class="btn btn-secondary" href="/" role="button">Go Back to Search</a> 
+        <a class="btn btn-outline-secondary" href="/" role="button">Go Back to Search</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>

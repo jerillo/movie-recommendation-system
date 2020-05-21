@@ -1,20 +1,23 @@
 <%- include("../partials/header") %>
 <div class="container">
-    <div class="row">
+    <div class="title">
         <h1 style="text-align: center;">Results for "<%= query %>"</h1>
+        <hr>
+    </div>
+    <div class="row">
         <div style="width: 90%; margin: 25px auto;">
             <div class="row text-center" style="display:flex; flex-wrap: wrap;">
                 <% data.Search.forEach(movie => { %>
                     <div class="col-md-4 col-sm-6">
-                        <div class="thumbnail">
+                        <div class="figure rounded">
                             <a href="/results/<%= movie.imdbID %>">
                                 <% if (movie.Poster === "N/A") { %>
-                                    <img src="/../img/default-poster.jpg"/>
+                                    <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
                                 <% }  else { %>
-                                    <img src="<%= movie.Poster %>"/>
+                                    <img class="figure-img img-fluid rounded" src="<%= movie.Poster %>"/>
                                 <% } %>
                             </a>
-                            <div class="caption">
+                            <div class="figure-caption">
                                 <h4><%= movie.Title %></h4>
                                 <p><%= movie.Year %></p>
                             </div>
@@ -23,7 +26,7 @@
                 <% }); %>
             </div>
             <div class="row">
-                <a class="btn btn-secondary" href="javascript:history.back()" role="button">Go Back</a> 
+                <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
             </div>
         </div>
     </div>
