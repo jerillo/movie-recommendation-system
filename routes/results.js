@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
             if (data.Response === 'False') {
-                req.flash('error', 'Invalid movie.');
+                req.flash('error', 'Movie not found');
                 res.redirect('/');
             }
             Rating.find({imdbID: imdbID}, (err, allRatings) => {
