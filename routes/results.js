@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
             if (data.Response === 'False') {
-                res.render('results/index', {query: query, error: data.Error});
+                res.render('results/index', {query: query, dataError: data.Error});
             } else {
-                res.render('results/index', {data: data, error: data.Error, query: query});
+                res.render('results/index', {data: data, dataError: data.Error, query: query});
             }
         }
     });
@@ -27,6 +27,10 @@ router.get('/:id', (req, res) => {
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
+            if (data.Response === 'False') {
+                req.flash('error', 'Invalid movie.');
+                res.redirect('/');
+            }
             Rating.find({imdbID: imdbID}, (err, allRatings) => {
                 if (err) {
                     console.log(err);

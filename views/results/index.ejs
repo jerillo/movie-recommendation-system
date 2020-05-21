@@ -5,9 +5,9 @@
         <hr>
     </div>
     <div class="row text-center" style="width: 90%; margin: 25px auto;">
-        <% if (error) { %> 
+        <% if (dataError) { %> 
             <div class="col-md-12">
-                <h4><%= error %></h4>
+                <h4><%= dataError %></h4>
             </div>
         <% } else { %>
             <% data.Search.forEach(movie => { %>

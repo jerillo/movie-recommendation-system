@@ -2,6 +2,15 @@ body, .jumbotron {
     background-color: white;
 }
 
+#flash {
+    padding-top: 10px;
+}
+
+.alert {
+    padding: 0 1.25rem;
+}
+
+
 .title {
     padding-top: 5%;
 }
