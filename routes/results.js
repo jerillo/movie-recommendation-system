@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
             if (data.Response === 'False') {
-                res.render('results/bad-results', {query: query, error: data.Error});
+                res.render('results/index', {query: query, error: data.Error});
             } else {
                 res.render('results/index', {data: data, query: query});
             }
