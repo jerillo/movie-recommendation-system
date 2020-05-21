@@ -97,7 +97,7 @@ router.get('/:id/edit', middleware.isLoggedIn, (req, res) => {
 router.put('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.findOneAndUpdate({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id},
             {$set:{rating: req.body.rating, comment: req.body.comment}}, {new: true}, (err, updatedRating) => {
-        if (err || !foundRating) {
+        if (err || !updatedRating) {
             req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
@@ -109,7 +109,7 @@ router.put('/:id', middleware.isLoggedIn, (req, res) => {
 // Delete rating
 router.delete('/:id', middleware.isLoggedIn, (req, res) => {
     Rating.deleteOne({author: {id: req.user._id, username: req.user.username}, imdbID: req.params.id}, err => {
-        if (err || !foundRating) {
+        if (err) {
             req.flash('error', 'Rating not found');
             res.redirect('/ratings')
         } else {
