@@ -9,7 +9,7 @@
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% ratings.forEach((rating) => { %>
-            <div class="col-md-3 col-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="figure rounded">
                     <a href="/ratings/<%= rating.imdbID %>">
                         <% if (rating.poster === "N/A") { %>
@@ -22,8 +22,8 @@
                         <h4><%= rating.title %></h4>
                         <p><i class="fa fa-star"></i> <%= rating.rating %>/10</p>
                         <% if (rating.comment) { %> 
-                            <% if (rating.comment.length > 25) { %>
-                                <p><%= rating.comment.substring(0, 25) %>...</p>
+                            <% if (rating.comment.length > 30) { %>
+                                <p><%= rating.comment.substring(0, 30) %>...</p>
                             <% } else { %>
                                 <p><%= rating.comment %></p>
                             <% } %>
@@ -44,6 +44,7 @@
             </div>    
         <% }); %>
     </div>
+    <hr>
     <div class="row" style="padding-bottom: 10px;">
         <a class="btn btn-outline-secondary" href="/" role="button">Go Back to Search</a> 
     </div>
