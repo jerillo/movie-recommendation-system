@@ -1,5 +1,6 @@
 # movie-recommendation-system
-Movie Recommendation System web app using Node and OMDb API
+Movie Recommendation System web app using Node, Express, MongoDB, and OMDb API
+###### Author: Jesnine Erillo
 --- 
 ***Currently in progress***
 
@@ -23,20 +24,26 @@ Deployed on Heroku! View [live website](https://movie-journal.herokuapp.com/).
 - [ ] Build movie recommendation system using k-means algorithm and least squares
 
 # Screenshots:
-Search for movies using OMDb:
-![Search](./preview/search.png)
-Results page for search query:  
-![Results](./preview/results.png)
-View more information about a movie:
-![View movie](./preview/view-movie.png)
-Add movies you've seen to your "watched" list and rate them:
+Search for movies:   
+
+![Search](./preview/search.png) 
+
+Results page for search query:    
+
+![Results](./preview/results.png) 
+
+View more information about a movie:    
+
+![View movie](./preview/view-movie.png)   
+
+Rate movies with collapsible rating form:  
+
 ![Collapsible Rating](./preview/collapsible-rating.gif)
-![Rate](./preview/new.png)
-View your ratings:
+
+View your ratings:  
+
 ![Ratings](./preview/ratings.png)
-Edit your ratings:
-![Edit](./preview/edit.png)
-Login:
-![Login](./preview/login.png)
-Flash message:
-![Flash Message](./preview/flash-message.gif)
+
+Edit your ratings:  
+
+![Edit](./preview/edit.png) 
