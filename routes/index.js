@@ -18,10 +18,11 @@ router.post('/register', (req, res) => {
     const newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
-            console.log(err);
-            return res.render('register');
+            req.flash("error", err.message);
+            return res.redirect("/register");
         }
         passport.authenticate('local')(req, res, () => {
+            req.flash('success', 'Welcome to Movie Journal, ' + user.username);
             res.redirect('/')
         });
     }); 
@@ -36,7 +37,8 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', 
     {
         successRedirect: '/ratings',
-        failureRedirect: '/login'
+        failureRedirect: '/login',
+        failureFlash: true,
     }), (req, res) => {
     res.send('login');
 });
@@ -44,6 +46,7 @@ router.post('/login', passport.authenticate('local',
 // Logic route
 router.get('/logout', (req, res) => {
     req.logout();
+    req.flash('success', 'Logged out successfully');
     res.redirect('/');
 });
 
