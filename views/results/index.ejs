@@ -12,7 +12,7 @@
         <% } else { %>
             <% data.Search.forEach(movie => { %>
                 <div class="col-md-4 col-sm-6">
-                    <div class="figure rounded">
+                    <div class="figure figure-index rounded">
                         <a href="/results/<%= movie.imdbID %>">
                             <% if (movie.Poster === "N/A") { %>
                                 <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
