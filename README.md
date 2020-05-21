@@ -1,5 +1,6 @@
 # movie-recommendation-system
-Movie Recommendation System web app using Node and OMDb API
+Movie Recommendation System web app using Node, Express, MongoDB, and OMDb API
+###### Author: Jesnine Erillo
 --- 
 ***Currently in progress***
 
