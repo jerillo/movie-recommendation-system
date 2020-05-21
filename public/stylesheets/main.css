@@ -43,8 +43,15 @@ body, .jumbotron {
     border-color: lightgray;
 }
 
+.figure img {
+    margin-bottom: 0;
+}
+
 .figure-index {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .figure-caption {
