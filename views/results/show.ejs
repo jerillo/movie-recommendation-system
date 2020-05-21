@@ -50,11 +50,38 @@
         </div>
     </div>
     <div class="row all-ratings card">
-        <div class="text-right">
+        <div class="text-right" style="margin-bottom:10px;">
             <% if (ratingExists) { %>
                 <a href="/ratings/<%= data.imdbID %>"><button class="btn btn-success"><i class="fa fa-star"></i> View Rating</button></a>
             <% } else { %>
-                <a href="/ratings/<%= data.imdbID %>/new"><button class="btn btn-success"><i class="fa fa-star"></i> Rate movie</button></a>
+                <div class="container">
+                    <a class="btn btn-success mb-2" role="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <i class="fa fa-star"></i> Rate movie
+                    </a>
+                    <div style="width=70%;">
+                        <div class="collapse" id="collapseComment">
+                            <div class="rounded text-left" style="border: 1px solid lightgray; padding: 2% 2% 0 2%;">
+                                <% if(!currentUser) { %>
+                                    <p>You need to <a href="/login">login</a> before you can rate movies.</p>
+                                <% } else { %>
+                                    <form action="/ratings/<%= data.imdbID %>" method="POST" autocomplete="off">
+                                        <div class="form-group">
+                                            <label for="rating">Rating <i class="fa fa-star"></i></label>
+                                            <input class="form-control" type="number" id="rating" name="rating" min="0" max="10" step="0.1" placeholder="rating/10">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment">Comment</label>
+                                            <textarea class="form-control" type="text" id="comment" name="comment" placeholder="comment"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <% } %>
         </div>
         <hr>
@@ -74,7 +101,7 @@
         <% } else { %>
             <div class="row">
                 <div class="col-md-12">
-                    <em>No ratings yet</em>
+                    <em>No ratings yet.</em>
                 </div>
             </div>
         <% } %>  
