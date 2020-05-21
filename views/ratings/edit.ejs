@@ -5,14 +5,16 @@
         <hr>
     </div>
     <div class="row">
-        <div style="width: 30%; margin: 25px auto;">
-            <div class="thumbnail">
+        <div class="col-sm-5 text-center">
+            <div class="figure rounded">
                 <% if (rating.poster === "N/A") { %>
-                    <img src="/../img/default-poster.jpg"/>
+                    <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
                 <% }  else { %>
-                    <img src="<%= rating.poster %>"/>
+                    <img class="figure-img img-fluid rounded" src="<%= rating.poster %>"/>
                 <% } %>        
             </div>
+        </div>
+        <div class="col-sm-7">
             <form action="/ratings/<%= rating.imdbID %>?_method=PUT" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label for="rating">Rating <i class="fa fa-star"></i></label>
@@ -26,9 +28,11 @@
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
             </form>
-            <hr>
-            <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
         </div>
+    </div>
+    <hr>
+    <div class="row" style="padding-bottom: 10px;">
+        <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 <%- include("../partials/footer") %>
