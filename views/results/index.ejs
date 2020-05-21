@@ -4,38 +4,34 @@
         <h1 style="text-align: center;">Results for "<%= query %>"</h1>
         <hr>
     </div>
-    <div class="row">
-        <div style="width: 90%; margin: 25px auto;">
-            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-                <% if (error) { %> 
-                    <div class="col-md-12">
-                        <h4><%= error %></h4>
+    <div class="row text-center" style="width: 90%; margin: 25px auto;">
+        <% if (error) { %> 
+            <div class="col-md-12">
+                <h4><%= error %></h4>
+            </div>
+        <% } else { %>
+            <% data.Search.forEach(movie => { %>
+                <div class="col-md-4 col-sm-6">
+                    <div class="figure rounded">
+                        <a href="/results/<%= movie.imdbID %>">
+                            <% if (movie.Poster === "N/A") { %>
+                                <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
+                            <% }  else { %>
+                                <img class="figure-img img-fluid rounded" src="<%= movie.Poster %>"/>
+                            <% } %>
+                        </a>
+                        <div class="figure-caption">
+                            <h4><%= movie.Title %></h4>
+                            <p><%= movie.Year %></p>
+                        </div>
                     </div>
-                <% } else { %>
-                    <% data.Search.forEach(movie => { %>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="figure rounded">
-                                <a href="/results/<%= movie.imdbID %>">
-                                    <% if (movie.Poster === "N/A") { %>
-                                        <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
-                                    <% }  else { %>
-                                        <img class="figure-img img-fluid rounded" src="<%= movie.Poster %>"/>
-                                    <% } %>
-                                </a>
-                                <div class="figure-caption">
-                                    <h4><%= movie.Title %></h4>
-                                    <p><%= movie.Year %></p>
-                                </div>
-                            </div>
-                        </div>    
-                    <% }); %>
-                <% } %> 
-            </div>
-            <hr>
-            <div class="row">
-                <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
-            </div>
-        </div>
+                </div>    
+            <% }); %>
+        <% } %> 
+    </div>
+    <hr>
+    <div class="row">
+        <a class="btn btn-outline-secondary" href="javascript:history.back()" role="button">Go Back</a> 
     </div>
 </div>
 

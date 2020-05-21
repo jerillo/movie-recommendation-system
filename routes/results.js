@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             if (data.Response === 'False') {
                 res.render('results/index', {query: query, error: data.Error});
             } else {
-                res.render('results/index', {data: data, query: query});
+                res.render('results/index', {data: data, error: data.Error, query: query});
             }
         }
     });
