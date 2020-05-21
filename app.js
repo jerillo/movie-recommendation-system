@@ -4,6 +4,7 @@ const app = express();
 const request = require('request');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override')
@@ -15,11 +16,12 @@ const resultRoutes = require('./routes/results');
 const ratingRoutes = require('./routes/ratings');
 const indexRoutes = require('./routes/index');
 
-mongoose.connect('mongodb://localhost:27017/movies', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
+app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
