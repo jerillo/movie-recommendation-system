@@ -17,7 +17,7 @@ Deployed on Heroku! View [live website](https://movie-journal.herokuapp.com/).
 - [x] Allow users to mark movies as seen
 - [x] Data persistence using MongoDB and Mongoose
 - [x] User authentication using Passport
-- [x] View other user ratings
+- [x] View other user's ratings
 - [ ] Add watchlist
 - [ ] Pagination for ratings
 - [ ] Pagination for results
