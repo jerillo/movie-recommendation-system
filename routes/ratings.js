@@ -34,6 +34,10 @@ router.get('/:id/new', middleware.isLoggedIn, (req, res) => {
 	request(url, (error, response, body) => {
 		if (!error && response.statusCode == 200) {
 			const data = JSON.parse(body);
+			if (data.Response === 'False') {
+				req.flash('error', 'Rating not found');
+				return res.redirect('/ratings');
+			}
 			res.render('ratings/new', { data: data });
 		}
 	});
@@ -47,6 +51,10 @@ router.post('/:id', middleware.isLoggedIn, (req, res) => {
 	request(url, (error, response, body) => {
 		if (!error && response.statusCode == 200) {
 			const data = JSON.parse(body);
+			if (data.Response === 'False') {
+				req.flash('error', 'Rating not found');
+				return res.redirect('/ratings');
+			}
 			const rating = req.body.rating;
 			const comment = req.body.comment;
 			const newRating = {
