@@ -1,0 +1,45 @@
+<%- include("../partials/header") %>
+<div class="container">
+    <div class="title">
+        <h1 style="text-align: center;"><%= username %>'s Movies List</h1>
+        <h5 style="text-align: center;">
+            Total time watching these movies: <%= Math.floor(totalTime/60) %> hours and <%= totalTime%60 %> minutes.
+        </h5>
+        <hr>
+    </div>
+    <div class="row text-center" style="width: 90%; margin: 25px auto;">
+        <% ratings.forEach((rating) => { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="figure figure-index rounded">
+                    <a href="/results/<%= rating.imdbID %>">
+                        <% if (rating.poster === "N/A") { %>
+                            <img class="figure-img img-fluid rounded" src="/../img/default-poster.jpg"/>
+                        <% }  else { %>
+                            <img class="figure-img img-fluid rounded" src="<%= rating.poster %>"/>
+                        <% } %>  
+                    </a>
+                    <figcaption class="figure-caption">
+                        <h4><%= rating.title %></h4>
+                        <p><i class="fa fa-star"></i> <%= rating.rating %>/10</p>
+                        <% if (rating.comment) { %> 
+                            <% if (rating.comment.length > 30) { %>
+                                <p><%= rating.comment.substring(0, 30) %>...</p>
+                            <% } else { %>
+                                <p><%= rating.comment %></p>
+                            <% } %>
+                        <% } %>
+                        <p><em>Created <%= moment(rating.createdAt).fromNow() %></em></p>
+                        <div class="d-flex justify-content-center p-2">
+                            <a href="/results/<%= rating.imdbID %>" class="btn btn-primary"><i class="fa fa-info-circle"></i></a>
+                        </div>
+                    </figcaption>
+                </div>
+            </div>    
+        <% }); %>
+    </div>
+    <hr>
+    <div class="row" style="padding-bottom: 10px;">
+        <a class="btn btn-outline-secondary" href="/" role="button">Go Back to Search</a> 
+    </div>
+</div>
+<%- include("../partials/footer") %>
