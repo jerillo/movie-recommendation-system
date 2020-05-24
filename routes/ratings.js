@@ -62,6 +62,9 @@ router.post('/:id', middleware.isLoggedIn, (req, res) => {
 					username: req.user.username
 				}
 			};
+			if (isNaN(newRating.runtime)) {
+				newRating.runtime = 0;
+			}
 			// Create a new rating and save to ratings DB
 			Rating.create(newRating, (err, newlyCreated) => {
 				if (err) {
