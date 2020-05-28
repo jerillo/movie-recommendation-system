@@ -2,7 +2,6 @@
 Movie Recommendation System web app using Node, Express, MongoDB, and OMDb API
 ###### Author: Jesnine Erillo
 --- 
-***Currently in progress***
 
 Deployed on Heroku! View [live website](https://movie-journal.herokuapp.com/).
 
